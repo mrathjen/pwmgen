@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<project>
+  <fileVersion>2</fileVersion>
+  <fileChecksum>372461663</fileChecksum>
+  <configuration>
+    <name>Debug</name>
+    <outputs>
+      <file>$TOOLKIT_DIR$\lib\shb_l.a</file>
+      <file>$PROJ_DIR$\..\..\..\inc\hw_ssi.h</file>
+      <file>$PROJ_DIR$\..\..\..\driverlib\pwm.h</file>
+      <file>$PROJ_DIR$\..\..\..\driverlib\sysctl.h</file>
+      <file>$PROJ_DIR$\..\drivers\rit128x96x4.h</file>
+      <file>$PROJ_DIR$\ewarm\Obj\rit128x96x4.o</file>
+      <file>$PROJ_DIR$\..\..\..\driverlib\pin_map.h</file>
+      <file>$PROJ_DIR$\..\..\..\driverlib\ssi.h</file>
+      <file>$PROJ_DIR$\ewarm\Exe\pwmgen.bin</file>
+      <file>$PROJ_DIR$\..\..\..\driverlib\gpio.h</file>
+      <file>$PROJ_DIR$\..\..\..\inc\hw_types.h</file>
+      <file>$TOOLKIT_DIR$\lib\rt7M_tl.a</file>
+      <file>$PROJ_DIR$\..\..\..\driverlib\debug.h</file>
+      <file>$PROJ_DIR$\ewarm\Obj\startup_ewarm.pbi</file>
+      <file>$PROJ_DIR$\ewarm\Exe\pwmgen.out</file>
+      <file>$TOOLKIT_DIR$\lib\dl7M_tln.a</file>
+      <file>$PROJ_DIR$\ewarm\Obj\rit128x96x4.pbi</file>
+      <file>$PROJ_DIR$\..\..\..\inc\lm3s8962.h</file>
+      <file>$PROJ_DIR$\..\..\..\inc\hw_gpio.h</file>
+      <file>$PROJ_DIR$\..\..\..\driverlib\interrupt.h</file>
+      <file>$PROJ_DIR$\ewarm\Obj\pwmgen.pbi</file>
+      <file>$PROJ_DIR$\ewarm\Obj\pwmgen.pbd</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdbool.h</file>
+      <file>$PROJ_DIR$\..\..\..\driverlib\systick.h</file>
+      <file>$PROJ_DIR$\..\..\..\inc\hw_ints.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Config_Normal.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Product.h</file>
+      <file>$PROJ_DIR$\..\..\..\utils\ustdlib.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\xencoding_limits.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Threads.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdarg.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
+      <file>$PROJ_DIR$\..\..\..\driverlib\uart.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\ycheck.h</file>
+      <file>$PROJ_DIR$\..\..\..\driverlib\ewarm-cm3\Exe\driverlib-cm3.a</file>
+      <file>$PROJ_DIR$\ewarm\List\pwmgen.map</file>
+      <file>$PROJ_DIR$\pwmgen.c</file>
+      <file>$PROJ_DIR$\..\drivers\rit128x96x4.c</file>
+      <file>$PROJ_DIR$\..\..\..\inc\hw_sysctl.h</file>
+      <file>$PROJ_DIR$\startup_ewarm.c</file>
+      <file>$TOOLKIT_DIR$\lib\m7M_tl.a</file>
+      <file>$PROJ_DIR$\pwmgen.icf</file>
+      <file>$PROJ_DIR$\..\..\..\inc\hw_memmap.h</file>
+      <file>$PROJ_DIR$\ewarm\Obj\startup_ewarm.o</file>
+      <file>$PROJ_DIR$\ewarm\Obj\pwmgen.o</file>
+      <file>$PROJ_DIR$\..\timers\startup_ewarm.c</file>
+      <file>$PROJ_DIR$\..\timers\timers.c</file>
+      <file>$PROJ_DIR$\..\..\..\driverlib\pwm.c</file>
+      <file>$PROJ_DIR$\..\qs_ek-lm3s8962\startup_ewarm.c</file>
+      <file>$PROJ_DIR$\..\..\..\driverlib\gpio.c</file>
+      <file>$PROJ_DIR$\..\..\..\driverlib\timer.h</file>
+    </outputs>
+    <file>
+      <name>$PROJ_DIR$\ewarm\Exe\pwmgen.out</name>
+      <outputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 36</file>
+        </tool>
+        <tool>
+          <name>OBJCOPY</name>
+          <file> 8</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 42 45 5 44 35 0 11 41 15</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\pwmgen.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 45</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 20</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 43 10 12 9 6 2 3 4 24 18 17 19 23 33 27 31 34 30 32 25 26 28 29 22 51</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 43 10 12 9 6 2 3 4 24 18 17 19 23 33 27 31 34 30 32 25 26 28 29 22 51</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\drivers\rit128x96x4.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 5</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 16</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 1 43 39 10 12 9 6 7 3 4</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 1 43 39 10 12 9 6 7 3 4</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\startup_ewarm.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 44</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 13</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>[ROOT_NODE]</name>
+      <outputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 14 36</file>
+        </tool>
+      </outputs>
+    </file>
+  </configuration>
+</project>
+
+
