@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR ELF Linker V6.40.1.53790/W32 for ARM              03/Dec/2012  19:27:23 #
+# IAR ELF Linker V6.40.1.53790/W32 for ARM              03/Dec/2012  20:46:25 #
 # Copyright 2007-2012 IAR Systems AB.                                         #
 #                                                                             #
 #    Output file  =  C:\StellarisWare\boards\ek-lm3s8962\pwmgen\ewarm\Exe\pwm #
@@ -9,10 +9,11 @@
 #                    mgen.map                                                 #
 #    Command line =  C:\StellarisWare\boards\ek-lm3s8962\pwmgen\ewarm\Obj\pwm #
 #                    gen.o C:\StellarisWare\boards\ek-lm3s8962\pwmgen\ewarm\O #
-#                    bj\rit128x96x4.o C:\StellarisWare\boards\ek-lm3s8962\pwm #
-#                    gen\ewarm\Obj\startup_ewarm.o                            #
-#                    C:\StellarisWare\driverlib\ewarm-cm3\Exe\driverlib-cm3.a #
-#                     --redirect _Printf=_PrintfTiny --redirect               #
+#                    bj\rfid_reader.o C:\StellarisWare\boards\ek-lm3s8962\pwm #
+#                    gen\ewarm\Obj\rit128x96x4.o                              #
+#                    C:\StellarisWare\boards\ek-lm3s8962\pwmgen\ewarm\Obj\sta #
+#                    rtup_ewarm.o C:\StellarisWare\driverlib\ewarm-cm3\Exe\dr #
+#                    iverlib-cm3.a --redirect _Printf=_PrintfTiny --redirect  #
 #                    _Scanf=_ScanfSmall -o C:\StellarisWare\boards\ek-lm3s896 #
 #                    2\pwmgen\ewarm\Exe\pwmgen.out --map                      #
 #                    C:\StellarisWare\boards\ek-lm3s8962\pwmgen\ewarm\List\pw #
@@ -39,53 +40,64 @@ __SystemLibrary = DLib
 "P1":  place in [from 0x00000000 to 0x0003ffff] { ro };
 "P2":  place in [from 0x20000000 to 0x2000ffff] { rw, block HEAP };
 
-  Section          Kind        Address   Size  Object
-  -------          ----        -------   ----  ------
-"A1":                                    0xf0
-  .intvec          const    0x00000000   0xf0  startup_ewarm.o [1]
-                          - 0x000000f0   0xf0
+  Section            Kind        Address    Size  Object
+  -------            ----        -------    ----  ------
+"A1":                                       0xf0
+  .intvec            const    0x00000000    0xf0  startup_ewarm.o [1]
+                            - 0x000000f0    0xf0
 
-"P1":                                   0xf18
-  .text            ro code  0x000000f0  0x364  sysctl.o [4]
-  .text            ro code  0x00000454  0x2a4  rit128x96x4.o [1]
-  .text            ro code  0x000006f8   0x72  ssi.o [4]
-  .text            ro code  0x0000076a   0x22  zero_init3.o [5]
-  .text            ro code  0x0000078c  0x122  gpio.o [4]
-  .text            ro code  0x000008b0  0x268  pwmgen.o [1]
-  .text            ro code  0x00000b18   0x7e  pwm.o [4]
-  .text            ro code  0x00000b98   0x56  timer.o [4]
-  .text            ro code  0x00000bf0   0x28  systick.o [4]
-  .text            ro code  0x00000c18   0x6c  interrupt.o [4]
-  .text            ro code  0x00000c84    0x8  cpu.o [4]
-  .rodata          const    0x00000c8c  0x1e2  rit128x96x4.o [1]
-  .rodata          const    0x00000e70   0x6c  sysctl.o [4]
-  .rodata          const    0x00000edc   0x50  rit128x96x4.o [1]
-  .text            ro code  0x00000f2c   0x28  data_init3.o [5]
-  .iar.init_table  const    0x00000f54   0x10  - Linker created -
-  .rodata          const    0x00000f64   0x20  pwmgen.o [1]
-  .text            ro code  0x00000f84   0x16  cmain.o [5]
-  .text            ro code  0x00000f9a    0x4  low_level_init.o [3]
-  .text            ro code  0x00000f9e    0x4  exit.o [3]
-  .text            ro code  0x00000fa4    0xa  cexit.o [5]
-  .text            ro code  0x00000fb0   0x14  exit.o [6]
-  .rodata          const    0x00000fc4   0x14  interrupt.o [4]
-  .rodata          const    0x00000fd8    0xc  rit128x96x4.o [1]
-  .rodata          const    0x00000fe4    0xc  sysctl.o [4]
-  .text            ro code  0x00000ff0    0xc  cstartup_M.o [5]
-  .text            ro code  0x00000ffc    0xa  startup_ewarm.o [1]
-  .rodata          const    0x00001006    0x0  zero_init3.o [5]
-                          - 0x00001006  0xf16
+"P1":                                     0x1244
+  .text              ro code  0x000000f0   0x3a4  pwmgen.o [1]
+  .text              ro code  0x00000494    0xc6  uart.o [4]
+  .text              ro code  0x0000055a    0x2e  copy_init3.o [5]
+  .text              ro code  0x00000588   0x12c  gpio.o [4]
+  .text              ro code  0x000006b4    0x7e  pwm.o [4]
+  .text              ro code  0x00000732    0x22  zero_init3.o [5]
+  .text              ro code  0x00000754    0x56  timer.o [4]
+  .text              ro code  0x000007ac   0x364  sysctl.o [4]
+  .text              ro code  0x00000b10    0x28  systick.o [4]
+  .text              ro code  0x00000b38   0x2a4  rit128x96x4.o [1]
+  .text              ro code  0x00000ddc    0x6c  interrupt.o [4]
+  .text              ro code  0x00000e48    0x30  rfid_reader.o [1]
+  .text              ro code  0x00000e78    0x72  ssi.o [4]
+  .text              ro code  0x00000eec     0x8  cpu.o [4]
+  .text              ro code  0x00000ef4    0x66  ABImemset.o [5]
+  .rodata            const    0x00000f5c   0x1e2  rit128x96x4.o [1]
+  .rodata            const    0x00001140    0x6c  sysctl.o [4]
+  .rodata            const    0x000011ac    0x58  pwmgen.o [1]
+  .rodata            const    0x00001204    0x50  rit128x96x4.o [1]
+  .text              ro code  0x00001254    0x28  data_init3.o [5]
+  .iar.init_table    const    0x0000127c    0x24  - Linker created -
+  .text              ro code  0x000012a0    0x16  cmain.o [5]
+  .text              ro code  0x000012b6     0x4  low_level_init.o [3]
+  .text              ro code  0x000012ba     0x4  exit.o [3]
+  .text              ro code  0x000012c0     0xa  cexit.o [5]
+  .text              ro code  0x000012cc    0x14  exit.o [6]
+  .rodata            const    0x000012e0    0x14  interrupt.o [4]
+  .rodata            const    0x000012f4     0xc  rit128x96x4.o [1]
+  .rodata            const    0x00001300     0xc  sysctl.o [4]
+  .text              ro code  0x0000130c     0xc  cstartup_M.o [5]
+  .text              ro code  0x00001318     0xa  startup_ewarm.o [1]
+  .rodata            const    0x00001322     0x0  zero_init3.o [5]
+  .rodata            const    0x00001322     0x0  copy_init3.o [5]
+  Initializer bytes  ro data  0x00001324    0x10  <for P2 s0>
+                            - 0x00001334  0x1244
 
-"P2", part 1 of 2:                       0x30
-  .bss             zero     0x20000000   0x20  pwmgen.o [1]
-  .bss             zero     0x20000020    0x8  rit128x96x4.o [1]
-  .bss             zero     0x20000028    0x4  pwmgen.o [1]
-  .bss             zero     0x2000002c    0x4  rit128x96x4.o [1]
-                          - 0x20000030   0x30
+"P2", part 1 of 3:                          0x10
+  P2 s0                       0x20000000    0x10  <Init block>
+    .data            inited   0x20000000    0x10  rfid_reader.o [1]
+                            - 0x20000010    0x10
 
-"P2", part 2 of 2:                      0x100
-  .noinit          uninit   0x20000030  0x100  startup_ewarm.o [1]
-                          - 0x20000130  0x100
+"P2", part 2 of 3:                          0x4c
+  .bss               zero     0x20000010    0x3c  pwmgen.o [1]
+  .bss               zero     0x2000004c     0x8  rit128x96x4.o [1]
+  .bss               zero     0x20000054     0x4  pwmgen.o [1]
+  .bss               zero     0x20000058     0x4  rit128x96x4.o [1]
+                            - 0x2000005c    0x4c
+
+"P2", part 3 of 3:                         0x100
+  .noinit            uninit   0x2000005c   0x100  startup_ewarm.o [1]
+                            - 0x2000015c   0x100
 
 
 *******************************************************************************
@@ -95,8 +107,14 @@ __SystemLibrary = DLib
           Address     Size
           -------     ----
 Zero (__iar_zero_init3)
-    1 destination range, total size 0x30:
-          0x20000000  0x30
+    1 destination range, total size 0x4c:
+          0x20000010  0x4c
+
+Copy (__iar_copy_init3)
+    1 source range, total size 0x10:
+          0x00001324  0x10
+    1 destination range, total size 0x10:
+          0x20000000  0x10
 
 
 
@@ -107,11 +125,12 @@ Zero (__iar_zero_init3)
     Module            ro code  ro data  rw data
     ------            -------  -------  -------
 C:\StellarisWare\boards\ek-lm3s8962\pwmgen\ewarm\Obj: [1]
-    pwmgen.o              616       32       36
+    pwmgen.o              932       88       64
+    rfid_reader.o          48       16       16
     rit128x96x4.o         676      574       12
     startup_ewarm.o        10      240      256
     -------------------------------------------
-    Total:              1 302      846      304
+    Total:              1 666      918      348
 
 command line: [2]
     -------------------------------------------
@@ -125,34 +144,37 @@ dl7M_tln.a: [3]
 
 driverlib-cm3.a: [4]
     cpu.o                   8
-    gpio.o                290
+    gpio.o                300
     interrupt.o           108       20
     pwm.o                 126
     ssi.o                 114
     sysctl.o              868      120
     systick.o              40
     timer.o                86
+    uart.o                198
     -------------------------------------------
-    Total:              1 640      140
+    Total:              1 848      140
 
 rt7M_tl.a: [5]
+    ABImemset.o           102
     cexit.o                10
     cmain.o                22
+    copy_init3.o           46
     cstartup_M.o           12
     data_init3.o           40
     zero_init3.o           34
     -------------------------------------------
-    Total:                118
+    Total:                266
 
 shb_l.a: [6]
     exit.o                 20
     -------------------------------------------
     Total:                 20
 
-    Gaps                   10        2
-    Linker created                  16
+    Gaps                    8        4
+    Linker created                  38
 -----------------------------------------------
-    Grand Total:        3 098    1 004      304
+    Grand Total:        3 816    1 100      348
 
 
 *******************************************************************************
@@ -161,90 +183,112 @@ shb_l.a: [6]
 
 Entry                      Address   Size  Type      Object
 -----                      -------   ----  ----      ------
-?main                   0x00000f85         Code  Gb  cmain.o [5]
-CPUcpsie                0x00000c85    0x8  Code  Gb  cpu.o [4]
-DebounceSelect          0x000008b1   0x54  Code  Gb  pwmgen.o [1]
-FaultISR                0x00001003    0x2  Code  Lc  startup_ewarm.o [1]
-Flags                   0x20000000    0x4  Data  Gb  pwmgen.o [1]
-GPIODirModeSet          0x0000078d   0x28  Code  Gb  gpio.o [4]
-GPIOPadConfigSet        0x000007b5   0x98  Code  Gb  gpio.o [4]
-GPIOPinRead             0x0000084d    0x6  Code  Gb  gpio.o [4]
-GPIOPinTypeGPIOInput    0x00000867   0x10  Code  Gb  gpio.o [4]
-GPIOPinTypeGPIOOutput   0x00000877    0xa  Code  Gb  gpio.o [4]
-GPIOPinTypePWM          0x0000089b    0xa  Code  Gb  gpio.o [4]
-GPIOPinTypeSSI          0x000008a5    0xa  Code  Gb  gpio.o [4]
-GPIOPinWrite            0x00000853    0x6  Code  Gb  gpio.o [4]
-IntDefaultHandler       0x00001005    0x2  Code  Lc  startup_ewarm.o [1]
-IntEnable               0x00000c23   0x56  Code  Gb  interrupt.o [4]
-IntMasterEnable         0x00000c19    0xa  Code  Gb  interrupt.o [4]
-NmiSR                   0x00001001    0x2  Code  Lc  startup_ewarm.o [1]
-PWMGenConfigure         0x00000b19   0x2c  Code  Gb  pwm.o [4]
-PWMGenEnable            0x00000b59    0x6  Code  Gb  pwm.o [4]
-PWMGenPeriodSet         0x00000b45   0x14  Code  Gb  pwm.o [4]
-PWMOutputState          0x00000b85   0x12  Code  Gb  pwm.o [4]
-PWMPulseWidthSet        0x00000b5f   0x1e  Code  Gb  pwm.o [4]
-PWM_Change              0x00000905   0x42  Code  Gb  pwmgen.o [1]
-RIT128x96x4Clear        0x00000501   0x3c  Code  Gb  rit128x96x4.o [1]
-RIT128x96x4Enable       0x000005ed   0x50  Code  Gb  rit128x96x4.o [1]
-RIT128x96x4Init         0x0000064b   0x60  Code  Gb  rit128x96x4.o [1]
-RIT128x96x4StringDraw   0x0000053d   0xa8  Code  Gb  rit128x96x4.o [1]
-RITWriteCommand         0x00000455   0x4c  Code  Lc  rit128x96x4.o [1]
-RITWriteData            0x000004ab   0x4c  Code  Lc  rit128x96x4.o [1]
-Region$$Table$$Base     0x00000f54          --   Gb  - Linker created -
-Region$$Table$$Limit    0x00000f64          --   Gb  - Linker created -
-ResetISR                0x00000ffd    0x4  Code  Gb  startup_ewarm.o [1]
-SSIBusy                 0x00000761    0xa  Code  Gb  ssi.o [4]
-SSIConfigSetExpClk      0x000006f9   0x46  Code  Gb  ssi.o [4]
-SSIDataPut              0x00000757    0xa  Code  Gb  ssi.o [4]
-SSIDisable              0x0000074b    0xc  Code  Gb  ssi.o [4]
-SSIEnable               0x0000073f    0xc  Code  Gb  ssi.o [4]
-SysCtlClockGet          0x00000257  0x19c  Code  Gb  sysctl.o [4]
-SysCtlClockSet          0x00000141  0x116  Code  Gb  sysctl.o [4]
-SysCtlDelay             0x00000139    0x8  Code  Gb  sysctl.o [4]
-SysCtlPWMClockSet       0x000003f3    0xa  Code  Gb  sysctl.o [4]
-SysCtlPeripheralEnable  0x000000f1   0x1c  Code  Gb  sysctl.o [4]
-SysTickEnable           0x00000bf1    0xc  Code  Gb  systick.o [4]
-SysTickIntEnable        0x00000bfd    0xc  Code  Gb  systick.o [4]
-SysTickIntHandler       0x0000096d   0x24  Code  Gb  pwmgen.o [1]
-SysTickPeriodSet        0x00000c09    0x8  Code  Gb  systick.o [4]
-Timer0IntHandler        0x00000947   0x26  Code  Gb  pwmgen.o [1]
-TimerConfigure          0x00000ba5   0x26  Code  Gb  timer.o [4]
-TimerEnable             0x00000b99    0xc  Code  Gb  timer.o [4]
-TimerIntClear           0x00000beb    0x4  Code  Gb  timer.o [4]
-TimerIntEnable          0x00000be1    0x4  Code  Gb  timer.o [4]
-TimerLoadSet            0x00000bd1   0x10  Code  Gb  timer.o [4]
-__cmain                 0x00000f85         Code  Gb  cmain.o [5]
-__exit                  0x00000fb1   0x14  Code  Gb  exit.o [6]
-__iar_data_init3        0x00000f2d   0x28  Code  Gb  data_init3.o [5]
-__iar_program_start     0x00000ff1         Code  Gb  cstartup_M.o [5]
-__iar_zero_init3        0x0000076b   0x22  Code  Gb  zero_init3.o [5]
-__low_level_init        0x00000f9b    0x4  Code  Gb  low_level_init.o [3]
+?main                   0x000012a1         Code  Gb  cmain.o [5]
+CPUcpsie                0x00000eed    0x8  Code  Gb  cpu.o [4]
+DebounceSelect          0x00000137   0x54  Code  Gb  pwmgen.o [1]
+FaultISR                0x0000131f    0x2  Code  Lc  startup_ewarm.o [1]
+Flags                   0x20000014    0x4  Data  Gb  pwmgen.o [1]
+GPIODirModeSet          0x00000589   0x28  Code  Gb  gpio.o [4]
+GPIOPadConfigSet        0x000005b1   0x98  Code  Gb  gpio.o [4]
+GPIOPinRead             0x00000649    0x6  Code  Gb  gpio.o [4]
+GPIOPinTypeGPIOInput    0x00000663   0x10  Code  Gb  gpio.o [4]
+GPIOPinTypeGPIOOutput   0x00000673    0xa  Code  Gb  gpio.o [4]
+GPIOPinTypePWM          0x00000697    0xa  Code  Gb  gpio.o [4]
+GPIOPinTypeSSI          0x000006a1    0xa  Code  Gb  gpio.o [4]
+GPIOPinTypeUART         0x000006ab    0xa  Code  Gb  gpio.o [4]
+GPIOPinWrite            0x0000064f    0x6  Code  Gb  gpio.o [4]
+IntDefaultHandler       0x00001321    0x2  Code  Lc  startup_ewarm.o [1]
+IntEnable               0x00000de7   0x56  Code  Gb  interrupt.o [4]
+IntMasterEnable         0x00000ddd    0xa  Code  Gb  interrupt.o [4]
+NmiSR                   0x0000131d    0x2  Code  Lc  startup_ewarm.o [1]
+PWMGenConfigure         0x000006b5   0x2c  Code  Gb  pwm.o [4]
+PWMGenEnable            0x000006f5    0x6  Code  Gb  pwm.o [4]
+PWMGenPeriodSet         0x000006e1   0x14  Code  Gb  pwm.o [4]
+PWMOutputState          0x00000721   0x12  Code  Gb  pwm.o [4]
+PWMPulseWidthSet        0x000006fb   0x1e  Code  Gb  pwm.o [4]
+PWM_Change              0x0000018b   0x42  Code  Gb  pwmgen.o [1]
+RIT128x96x4Clear        0x00000be5   0x3c  Code  Gb  rit128x96x4.o [1]
+RIT128x96x4Enable       0x00000cd1   0x50  Code  Gb  rit128x96x4.o [1]
+RIT128x96x4Init         0x00000d2f   0x60  Code  Gb  rit128x96x4.o [1]
+RIT128x96x4StringDraw   0x00000c21   0xa8  Code  Gb  rit128x96x4.o [1]
+RITWriteCommand         0x00000b39   0x4c  Code  Lc  rit128x96x4.o [1]
+RITWriteData            0x00000b8f   0x4c  Code  Lc  rit128x96x4.o [1]
+Region$$Table$$Base     0x0000127c          --   Gb  - Linker created -
+Region$$Table$$Limit    0x000012a0          --   Gb  - Linker created -
+ResetISR                0x00001319    0x4  Code  Gb  startup_ewarm.o [1]
+SSIBusy                 0x00000ee1    0xa  Code  Gb  ssi.o [4]
+SSIConfigSetExpClk      0x00000e79   0x46  Code  Gb  ssi.o [4]
+SSIDataPut              0x00000ed7    0xa  Code  Gb  ssi.o [4]
+SSIDisable              0x00000ecb    0xc  Code  Gb  ssi.o [4]
+SSIEnable               0x00000ebf    0xc  Code  Gb  ssi.o [4]
+SysCtlClockGet          0x00000913  0x19c  Code  Gb  sysctl.o [4]
+SysCtlClockSet          0x000007fd  0x116  Code  Gb  sysctl.o [4]
+SysCtlDelay             0x000007f5    0x8  Code  Gb  sysctl.o [4]
+SysCtlPWMClockSet       0x00000aaf    0xa  Code  Gb  sysctl.o [4]
+SysCtlPeripheralEnable  0x000007ad   0x1c  Code  Gb  sysctl.o [4]
+SysTickEnable           0x00000b11    0xc  Code  Gb  systick.o [4]
+SysTickIntEnable        0x00000b1d    0xc  Code  Gb  systick.o [4]
+SysTickIntHandler       0x000001f3   0x24  Code  Gb  pwmgen.o [1]
+SysTickPeriodSet        0x00000b29    0x8  Code  Gb  systick.o [4]
+Timer0IntHandler        0x000001cd   0x26  Code  Gb  pwmgen.o [1]
+TimerConfigure          0x00000761   0x26  Code  Gb  timer.o [4]
+TimerEnable             0x00000755    0xc  Code  Gb  timer.o [4]
+TimerIntClear           0x000007a7    0x4  Code  Gb  timer.o [4]
+TimerIntEnable          0x0000079d    0x4  Code  Gb  timer.o [4]
+TimerLoadSet            0x0000078d   0x10  Code  Gb  timer.o [4]
+UART0IntHandler         0x000000f1   0x46  Code  Gb  pwmgen.o [1]
+UARTCharGetNonBlocking  0x00000537    0xa  Code  Gb  uart.o [4]
+UARTCharsAvail          0x00000527    0x6  Code  Gb  uart.o [4]
+UARTConfigSetExpClk     0x00000495   0x4c  Code  Gb  uart.o [4]
+UARTDisable             0x000004fb   0x1e  Code  Gb  uart.o [4]
+UARTEnable              0x000004e1   0x1a  Code  Gb  uart.o [4]
+UARTIntClear            0x00000557    0x4  Code  Gb  uart.o [4]
+UARTIntEnable           0x00000547    0x6  Code  Gb  uart.o [4]
+UARTIntStatus           0x0000054d    0xa  Code  Gb  uart.o [4]
+__aeabi_memset          0x00000ef5         Code  Gb  ABImemset.o [5]
+__cmain                 0x000012a1         Code  Gb  cmain.o [5]
+__exit                  0x000012cd   0x14  Code  Gb  exit.o [6]
+__iar_Memset            0x00000ef5         Code  Gb  ABImemset.o [5]
+__iar_Memset_word       0x00000efd         Code  Gb  ABImemset.o [5]
+__iar_copy_init3        0x0000055b   0x2e  Code  Gb  copy_init3.o [5]
+__iar_data_init3        0x00001255   0x28  Code  Gb  data_init3.o [5]
+__iar_program_start     0x0000130d         Code  Gb  cstartup_M.o [5]
+__iar_zero_init3        0x00000733   0x22  Code  Gb  zero_init3.o [5]
+__low_level_init        0x000012b7    0x4  Code  Gb  low_level_init.o [3]
 __vector_table          0x00000000   0xf0  Data  Gb  startup_ewarm.o [1]
-_call_main              0x00000f91         Code  Gb  cmain.o [5]
-_exit                   0x00000fa5         Code  Gb  cexit.o [5]
-_main                   0x00000f97         Code  Gb  cmain.o [5]
-current_period          0x20000018    0x4  Data  Gb  pwmgen.o [1]
-exit                    0x00000f9f    0x4  Code  Gb  exit.o [3]
-g_pucBuffer             0x20000020    0x8  Data  Lc  rit128x96x4.o [1]
-g_pucFont               0x00000c8c  0x1e0  Data  Lc  rit128x96x4.o [1]
+_call_main              0x000012ad         Code  Gb  cmain.o [5]
+_exit                   0x000012c1         Code  Gb  cexit.o [5]
+_main                   0x000012b3         Code  Gb  cmain.o [5]
+adminId                 0x20000000   0x10  Data  Gb  rfid_reader.o [1]
+clearRFIDBuff           0x00000e65    0xa  Code  Gb  rfid_reader.o [1]
+current_period          0x20000044    0x4  Data  Gb  pwmgen.o [1]
+doorState               0x20000010    0x1  Data  Gb  pwmgen.o [1]
+exit                    0x000012bb    0x4  Code  Gb  exit.o [3]
+g_pucBuffer             0x2000004c    0x8  Data  Lc  rit128x96x4.o [1]
+g_pucFont               0x00000f5c  0x1e0  Data  Lc  rit128x96x4.o [1]
 g_pucRIT128x96x4HorizontalInc
-                        0x00000fd8    0x2  Data  Lc  rit128x96x4.o [1]
-g_pucRIT128x96x4Init    0x00000edc   0x50  Data  Lc  rit128x96x4.o [1]
+                        0x000012f4    0x2  Data  Lc  rit128x96x4.o [1]
+g_pucRIT128x96x4Init    0x00001204   0x50  Data  Lc  rit128x96x4.o [1]
 g_pucRIT128x96x4VerticalInc
-                        0x00000e6c    0x2  Data  Lc  rit128x96x4.o [1]
-g_pulEnRegs             0x00000fc4   0x14  Data  Lc  interrupt.o [4]
-g_pulRCGCRegs           0x00000fe4    0xc  Data  Lc  sysctl.o [4]
-g_pulXtals              0x00000e70   0x6c  Data  Lc  sysctl.o [4]
-g_ulFlags               0x20000028    0x4  Data  Gb  pwmgen.o [1]
-g_ulSSIFlags            0x2000002c    0x4  Data  Lc  rit128x96x4.o [1]
-g_ulTickCount           0x20000004    0x4  Data  Gb  pwmgen.o [1]
-lower_period            0x20000014    0x4  Data  Gb  pwmgen.o [1]
-main                    0x00000a6d   0x6a  Code  Gb  pwmgen.o [1]
-pulStack                0x20000030  0x100  Data  Lc  startup_ewarm.o [1]
-pwm_init                0x00000991   0x96  Code  Gb  pwmgen.o [1]
-ulPeriod                0x2000001c    0x4  Data  Gb  pwmgen.o [1]
-up_down_but_init        0x00000a27   0x46  Code  Gb  pwmgen.o [1]
-upper_period            0x20000010    0x4  Data  Gb  pwmgen.o [1]
+                        0x0000113c    0x2  Data  Lc  rit128x96x4.o [1]
+g_pulEnRegs             0x000012e0   0x14  Data  Lc  interrupt.o [4]
+g_pulRCGCRegs           0x00001300    0xc  Data  Lc  sysctl.o [4]
+g_pulXtals              0x00001140   0x6c  Data  Lc  sysctl.o [4]
+g_ulFlags               0x20000054    0x4  Data  Gb  pwmgen.o [1]
+g_ulSSIFlags            0x20000058    0x4  Data  Lc  rit128x96x4.o [1]
+g_ulTickCount           0x20000030    0x4  Data  Gb  pwmgen.o [1]
+i                       0x20000028    0x2  Data  Gb  pwmgen.o [1]
+is_rfid_valid           0x00000e49   0x1c  Code  Gb  rfid_reader.o [1]
+lower_period            0x20000040    0x4  Data  Gb  pwmgen.o [1]
+main                    0x000002f3  0x146  Code  Gb  pwmgen.o [1]
+pulStack                0x2000005c  0x100  Data  Lc  startup_ewarm.o [1]
+pwm_init                0x00000217   0x96  Code  Gb  pwmgen.o [1]
+readId                  0x20000018   0x10  Data  Gb  pwmgen.o [1]
+rfidFlag                0x20000011    0x1  Data  Gb  pwmgen.o [1]
+ulLoop                  0x2000002c    0x4  Data  Gb  pwmgen.o [1]
+ulPeriod                0x20000048    0x4  Data  Gb  pwmgen.o [1]
+up_down_but_init        0x000002ad   0x46  Code  Gb  pwmgen.o [1]
+upper_period            0x2000003c    0x4  Data  Gb  pwmgen.o [1]
 
 
 [1] = C:\StellarisWare\boards\ek-lm3s8962\pwmgen\ewarm\Obj
@@ -254,9 +298,9 @@ upper_period            0x20000010    0x4  Data  Gb  pwmgen.o [1]
 [5] = rt7M_tl.a
 [6] = shb_l.a
 
-  3 098 bytes of readonly  code memory
-  1 004 bytes of readonly  data memory
-    304 bytes of readwrite data memory
+  3 816 bytes of readonly  code memory
+  1 100 bytes of readonly  data memory
+    348 bytes of readwrite data memory
 
 Errors: none
 Warnings: none

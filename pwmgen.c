@@ -39,8 +39,14 @@
 #include "driverlib/uart.h"
 #include "utils/ustdlib.h"
 #include <stdbool.h>
+#include "rfid_reader.h"
 
 #include "driverlib/timer.h"
+
+// Unlock is 0x0, and lock is 0x1
+unsigned char doorState = 0x0;
+
+volatile unsigned long ulLoop;
 
 //*****************************************************************************
 //
@@ -95,6 +101,46 @@ __error__(char *pcFilename, unsigned long ulLine)
 {
 }
 #endif
+
+unsigned char rfidFlag = 0x0;
+char readId[16];
+short i = 0x0;
+void
+UART0IntHandler(void)
+{
+    unsigned long ul0Status;
+    
+    //
+    // Get the interrrupt status.
+    //
+    ul0Status = UARTIntStatus(UART0_BASE, true);
+
+    //
+    // Clear the asserted interrupts.
+    //
+    UARTIntClear(UART0_BASE, ul0Status);
+    
+  
+    //
+    // Loop while there are characters in the receive FIFO.
+    //
+    while(UARTCharsAvail(UART0_BASE))
+    {
+        //
+        // Read the next character from the UART0 and write it to the RFID array
+        //
+        if(16 >= i)
+        {
+          readId[i] = UARTCharGetNonBlocking(UART0_BASE);
+          i++;
+        }
+
+      //UARTCharPutNonBlocking(UART1_BASE, UARTCharGetNonBlocking(UART0_BASE));
+    }
+    if(16 == i){
+      rfidFlag = 0x1;
+    }
+}
 
 //*****************************************************************************
 // Debounce the select button: set a flag when it is pressed.
@@ -322,6 +368,33 @@ main(void)
     pwm_init();
     up_down_but_init();
     
+    //////////////////////////////////////////////////////////////////////////
+    //
+    // Enable the peripherals used by this example.
+    //
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
+
+    //
+    // Set GPIO A0 and A1 as UART pins.
+    //
+    GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
+
+    //
+    // Configure the UART0 for 9600, 8-N-1 operation.
+    //
+    UARTConfigSetExpClk(UART0_BASE, SysCtlClockGet(), 9600,
+                        (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE |
+                         UART_CONFIG_PAR_NONE));
+    
+    //
+    // Enable the UART0 interrupt.
+    //
+    IntEnable(INT_UART0);
+    //IntEnable(INT_UART1);
+    UARTIntEnable(UART0_BASE, UART_INT_RX | UART_INT_RT);
+    //////////////////////////////////////////////////////////////////////////
+    
     //
     // Enable the peripherals used by this example.
     //
@@ -349,6 +422,45 @@ main(void)
     //
     while(1)
     {
+            // Check to see if a RFID has been read.
+      if(rfidFlag){
+        // Clear the flag and i for the buffer
+        rfidFlag = 0;
+        i = 0x0;
+        // Validate the Card ID
+        if(is_rfid_valid(readId)){
+          // If RFID is valid
+          RIT128x96x4StringDraw("RFID: Valid", 12, 56, 15);
+          for(ulLoop = 0; ulLoop < 200000; ulLoop++)
+          {
+          }
+          RIT128x96x4StringDraw("RFID:      ", 12, 56, 15);
+          if(doorState)
+          {
+            // Door is locked, so unlock the door
+            Flags.down_press = 1;
+            PWM_Change();
+            Flags.down_press = 0;
+            doorState = 0;
+          }else
+          {
+            // Door is unlocked, so lock it
+            Flags.up_press = 1;
+            PWM_Change();
+            Flags.up_press = 0;
+            doorState = 1;
+          }
+        }else{
+          // If RFID is invalid
+          RIT128x96x4StringDraw("RFID: Invalid", 12, 56, 15);
+          for(ulLoop = 0; ulLoop < 200000; ulLoop++)
+          {
+          }
+          RIT128x96x4StringDraw("RFID:        ", 12, 56, 15);
+        }
+        // Clear the rfid buffer
+        clearRFIDBuff();
+      }
     }
 }
 

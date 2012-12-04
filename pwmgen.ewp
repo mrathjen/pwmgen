@@ -933,6 +933,12 @@
       <name>$PROJ_DIR$\pwmgen.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\rfid_reader.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\rfid_reader.h</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\drivers\rit128x96x4.c</name>
     </file>
     <file>
